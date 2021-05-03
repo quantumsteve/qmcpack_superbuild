@@ -35,3 +35,17 @@ ExternalProject_Add(
   INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/qmcpack-complex/install
   CMAKE_ARGS "${CL_ARGS};-DQMC_COMPLEX=1"
 )
+
+enable_testing()
+
+add_test(
+    NAME qmcpack-real-test
+    COMMAND ${CMAKE_COMMAND} -DTEST_EXECUTABLE=ctest -P ${CMAKE_SOURCE_DIR}/cmake/RunTests.cmake
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/qmcpack-real-prefix/src/qmcpack-real-build
+)
+
+add_test(
+    NAME qmcpack-complex-test
+    COMMAND ${CMAKE_COMMAND} -DTEST_EXECUTABLE=ctest -P ${CMAKE_SOURCE_DIR}/cmake/RunTests.cmake
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/qmcpack-complex-prefix/src/qmcpack-complex-build
+)
