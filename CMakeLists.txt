@@ -82,13 +82,19 @@ add_test(
     WORKING_DIRECTORY ${binary_dir}
 )
 
-# Install qmcpack and  from qmcpack-real
+# Install qmcpack and tools from qmcpack-real
 ExternalProject_Get_Property(qmcpack-real install_dir)
 install(DIRECTORY ${install_dir}/bin/
 	DESTINATION bin
 )
 
+# Install qmcpack_complex from qmcpack-complex
 ExternalProject_Get_Property(qmcpack-complex install_dir)
 install(FILES ${install_dir}/bin/qmcpack_complex
         DESTINATION bin
+)
+
+install(FILES ${install_dir}/bin/qmcpack.settings
+        DESTINATION bin
+	RENAME qmcpack_complex.settings
 )
